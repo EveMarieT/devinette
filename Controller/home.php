@@ -1,20 +1,66 @@
 <?php
 
-/*** Accés au model ***/
-$query = "SELECT * FROM devinette";
-$bdd = new PDO("mysql:host=localhost; dbname=devinette; charset=utf-8", "root", "root");
-$req = $bdd->prepare($query);
-$req->execute();
-while ($row = $req->fetch(PDO::FETCH_ASSOC)) {
+/***
+* Class Home
+*
+* use to show the home page
+*/
 
-  $devinette['id']         = $row['id'];
-  $devinette['name']       = $row['name'];
-  $devinette['question']   = $row['question'];
-  $devinette['answer']     = $row['answer'];
-  $devinette['created_at'] = $row['created_at'];
+class Home
+{
+  public function showHome($params)
+  {
+    $manager = new DevinetteManager();
+    $devinettes = $manager->findAll();
 
-  $devinettes[] = $devinette; // tableau de tableau
+    $myView = new View('home');
+    $myView->render(array('devinettes' => $devinettes));
+  }
 
-};
+  public function showContact($params)
+  {
+    $myView = new View('contact');
+    $myView->render();
 
-include(VIEW.'home.php');
+  }
+
+  public function editDev($params)
+  {
+      if(isset($_GET['id'])) {
+
+          $id = $_GET['id'];
+
+          $manager = new Devinette();
+          $devinette = $manager->find($id);
+
+      } else {
+          $devinette = new Devinette();
+      }
+
+      $myView = new View('edit');
+      $myView->render(array('devinette' => $devinette));
+  }
+
+  public function addDev($params)
+  {
+    $values = $_POST['values'];
+
+    $manager = new DevinetteManager();
+    $manager->create($values);
+
+    $myView = new View();
+    $myView->redirect('home.html');
+  }
+
+  public function delDev($params)
+  {
+
+      $id = $_GET['id'];
+      $manager = new DevinetteManager();
+      $manager->delete($id);
+
+      $myView = new View();
+      $myView->redirect('home.html');
+  }
+
+}

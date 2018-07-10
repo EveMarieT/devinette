@@ -1,21 +1,19 @@
-<?php include('_head.php');?>
-<?php include('_header.php');?>
 
 <div id="container">
   <h2>Liste des devinettes</h2>
 
-  <?php foreach($devinettes as $devinette);?>
+  <?php foreach($devinettes as $devinette):?>
     <div class="question">
-      <h3><?= $devinette['name'];?></h3>
-      <?= $devinette['question'];?>
+      <h3><?= $devinette->getName();?></h3>
+      <?= $devinette->getQuestion();?>
       <br/>
       <button style="">
-        <a href ='edit.php?id=<?= $devinette['id'];?>'>
+        <a href ="edit.php?id=<?= $devinette->getId();?>">
           modifier
         </a>
       </button>
       <button class="deleteButton">
-        <a href='delete.php?id=<?= $devinette['id'];?>'>
+        <a href="<?= HOST;?>'delete/id/<?= $devinette->getId();?>">
           effacer
         </a>
       </button>
@@ -23,13 +21,13 @@
         Voir la réponse
       </button>
       <div class="divAnswer">
-        <?= $devinette['answer'];?>
+        <?= $devinette->getAnswer();?>
       </div>
     </div>
-  <?php endforeach;?>
+    <?php endforeach;?>
+
 </div>
 
-<?php include('_footer.php');?>
 
 <script type="text/javascript">
   $('.showAnswer').click(function(){
