@@ -8,12 +8,12 @@
       <?= $devinette->getQuestion();?>
       <br/>
       <button style="">
-        <a href ="edit.php?id=<?= $devinette->getId();?>">
+        <a href ="<?= HOST;?>modification.html/id/<?= $devinette->getId();?>">
           modifier
         </a>
       </button>
       <button class="deleteButton">
-        <a href="<?= HOST;?>'delete/id/<?= $devinette->getId();?>">
+        <a href="<?= HOST;?>delete/id/<?= $devinette->getId();?>">
           effacer
         </a>
       </button>

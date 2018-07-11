@@ -6,14 +6,15 @@
  */
 class Routeur
 {
-    private $request;
 
+    private $request;
     private $routes = [
                           "home.html"             => ["controller" => 'Home', "method" => 'showHome'],
                           "contact.html"          => ["controller" => 'Home', "method" => 'showContact'],
                           "create-devinette.html" => ["controller" => 'Home', "method" => 'editDev'],
                           "ajout.html"            => ["controller"  =>'Home', "method" => 'addDev'],
                           "delete"                => ["controller"  =>'Home', "method" => 'delDev'],
+                          "modification.html"     => ["controller"  =>'Home', "method" => 'editDev'],
                       ];
 
     public function __construct($request)
@@ -29,6 +30,9 @@ class Routeur
 
     public function getParams()
     {
+
+
+        $params = array();
         $elements = explode('/', $this->request);
         unset($elements[0]);
 
@@ -38,7 +42,13 @@ class Routeur
             $i++;
         }
 
-        if(!isset($params)) $params = null;
+        if($_POST)
+        {
+            foreach ($_POST as $key => $val)
+            {
+              $params[$key] = $val;
+            }
+        }
         return $params;
     }
 

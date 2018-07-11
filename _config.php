@@ -16,12 +16,12 @@ class MyAutoload
     define('HOST', 'http://'.$host.'/test/');
     define('ROOT', $root.'/test/');
 
-    define('MODEL', ROOT.'model/');
-    define('VIEW', ROOT.'view/');
-    define('CONTROLLER', ROOT.'controller/');
-    define('CLASSES', ROOT.'classes/');
+    define('MODEL', ROOT.'/model/');
+    define('VIEW', ROOT.'/view/');
+    define('CONTROLLER', ROOT.'/controller/');
+    define('CLASSES', ROOT.'/classes/');
 
-    define('ASSETS', HOST.'assets/');
+    define('ASSETS', HOST.'/assets/');
   }
 
   public static function autoload($class)
